@@ -1,0 +1,107 @@
+﻿@model EmployeesManagement.ViewModels.ProfileViewModel
+
+@{
+    ViewData["Title"] = "Assign User Rights";
+}
+
+<style>
+    /* Define a CSS class for highlighting Module names */
+    .module-name {
+        color: blue; /* You can adjust the color as needed */
+        font-weight: bold; /* Make the text bold */
+    }
+</style>
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <form asp-action="UserGroupRights" method="post">
+                <input type="hidden" name="Id" value="@Model.RoleId">
+                <table id="example1" class="table table-bordered table-striped table-hover table-fixed-header">
+                    <thead class="header">
+                        <tr>
+                            <th colspan="8">
+                                <label class="">
+                                    <input type="checkbox" id="checkAll"> Check All
+                                </label>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th style="width: 15%;">Module</th>
+                            <th style="width: 15%;">SubModule</th>
+                            <th style="width: 15%;">Actions</th>
+                            <th style="width: 10%;">Assign Right</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Profiles != null)
+                        {
+                            foreach (var module in Model.Profiles.Where(x => x.ProfileId is null))
+                            {
+                                <tr>
+                                    <td class="module-name">@module.Name</td> <!-- Apply the CSS class here -->
+                                    @if (module.Children.Any())
+                                    {
+                                        foreach (var submodule in module.Children)
+                                        {
+                                        <tr>
+                                            <th></th>
+                                            <th>
+                                                <input type="hidden" name="RolesProfilesIds[]" value="@submodule.Id">
+                                                    @submodule.Name
+                                            </th>
+                                        </tr>
+                                                @foreach (var actions in submodule.Children)
+                                                {
+                                            <tr>
+                                                <th></th>
+                                                <th></th>
+                                                <td>@actions.Name</td>
+                                                <td>
+                                                        @if (Model.RolesRightsIds.Contains(actions.Id))
+                                                        {
+                                                        <label class="">
+                                                            <input type="checkbox" class="submoduleCheckbox" name="Ids[]" value="@actions.Id" checked="checked">
+                                                            </label>
+                                                        }
+                                                        else
+                                                        {
+                                                        <label class="">
+                                                            <input type="checkbox" class="submoduleCheckbox" name="Ids[]" value="@actions.Id">
+                                                        </label>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                                }
+                                        }
+                                    }
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="card-footer">
+                            <input type="submit" value="Assign Rights" class="btn btn-primary" />
+                            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('checkAll').addEventListener('change', function (event) {
+                var checkboxes = document.querySelectorAll('.submoduleCheckbox');
+                checkboxes.forEach(function (checkbox) {
+                    checkbox.checked = event.target.checked;
+                });
+            });
+        });
+    </script>
+}

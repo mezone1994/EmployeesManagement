@@ -1,0 +1,84 @@
+﻿@model EmployeesManagement.Models.LeaveApplication
+
+@{
+    ViewData["Title"] = "Reject Leave";
+}
+
+<form asp-action="RejectLeave" method="post">
+    <h1>Reject Leave Applications Details</h1>
+
+    <div class="card-body">
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Employee)
+                    </th>
+                    <td class="col-sm-3">
+                        @Html.DisplayFor(model => model.Employee.FullName)
+                    </td>
+                    <th class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.NoOfDays)
+                    </th>
+                    <td class="col-sm-3">
+                        @Html.DisplayFor(model => model.NoOfDays)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.StartDate)
+                    </th>
+                    <td class="col-sm-3">
+                        @Html.DisplayFor(model => model.StartDate)
+                    </td>
+                    <th class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.EndDate)
+                    </th>
+                    <td class="col-sm-3">
+                        @Html.DisplayFor(model => model.EndDate)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Duration)
+                    </th>
+                    <td class="col-sm-3">
+                        @Html.DisplayFor(model => model.Duration.Description)
+                    </td>
+                    <th class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.LeaveType)
+                    </th>
+                    <td class="col-sm-3">
+                        @Html.DisplayFor(model => model.LeaveType.Name)
+                    </td>
+                </tr>
+                <tr>
+                    <th class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Attachment)
+                    </th>
+                    <td class="col-sm-3">
+                        @Html.DisplayFor(model => model.Attachment)
+                    </td>
+                    <th class="col-sm-3">
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <td class="col-sm-3">
+                        @Html.DisplayFor(model => model.Status.Description)
+                    </td>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card-footer">
+
+                <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+                <input type="submit" value="Reject Leave Application" class="btn btn-danger" />
+
+            </div>
+        </div>
+
+    </div>
+</form>

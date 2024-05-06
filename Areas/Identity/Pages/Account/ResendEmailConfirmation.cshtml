@@ -1,0 +1,64 @@
+﻿@page
+@model ResendEmailConfirmationModel
+@{
+    ViewData["Title"] = "Resend email confirmation";
+    Layout = null; // Hide the main layout
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="~/AdminLTE/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/AdminLTE/plugins/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <!-- AdminLTE CSS -->
+    <link href="~/AdminLTE/dist/css/adminlte.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="register-box">
+                    <div class="register-logo">
+                        <a href="#"><b>Resend</b>Confirmation</a>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-body register-card-body">
+                            <p class="login-box-msg">Enter your email</p>
+                            <form method="post">
+                                <div asp-validation-summary="All" class="text-danger" role="alert"></div>
+                                <div class="input-group mb-3">
+                                    <input asp-for="Input.Email" class="form-control" aria-required="true" placeholder="Email" />
+                                    <div class="input-group-append">
+                                        <div class="input-group-text">
+                                            <span class="fas fa-envelope"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                                <button type="submit" class="btn btn-primary btn-block">Resend</button>
+                            </form>
+                        </div>
+                        <!-- /.form-box -->
+                    </div><!-- /.card -->
+                </div><!-- /.register-box -->
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="~/AdminLTE/plugins/jquery/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="~/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- AdminLTE JS -->
+    <script src="~/AdminLTE/dist/js/adminlte.min.js"></script>
+    <!-- Validation Scripts -->
+    <partial name="_ValidationScriptsPartial" />
+</body>
+</html>

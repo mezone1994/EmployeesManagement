@@ -1,0 +1,107 @@
+﻿@model IEnumerable<EmployeesManagement.Models.LeaveApplication>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary"><i class="fa fa-plus"></i>Add New Leave</a>
+</p>
+<div class="card-body">
+    <table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.NoOfDays)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Duration)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LeaveType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Attachment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    Actions
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NoOfDays)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Duration.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LeaveType.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Attachment)
+                    </td>
+                    <td style="color:
+                    @if (item.Status.Description == "Pending")
+                    {
+                            <text>blue</text>
+                        }
+                        else if (item.Status.Description == "Approved")
+                        {
+                            <text>green</text>
+                        }
+                        else if (item.Status.Description == "Rejected")
+                        {
+                            <text>red</text>
+                        }
+                            ">
+                        @Html.DisplayFor(modelItem => item.Status.Description)
+                        </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="actionsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Actions
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="actionsDropdown">
+                                @if (item.Status.Code == "Pending")
+                                {
+                                    <a class="dropdown-item" asp-action="ApproveLeave" asp-route-id="@item.Id"><i class="fa fa-check"></i> Approve</a>
+                                    <a class="dropdown-item" asp-action="RejectLeave" asp-route-id="@item.Id"><i class="fa fa-thumbs-down"></i> Reject</a>
+                                }
+                                <a class="dropdown-item" asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pen"></i> Edit</a>
+                                <a class="dropdown-item" asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-eye"></i> View</a>
+                                <a class="dropdown-item" asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash"></i> Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
